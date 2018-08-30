@@ -1,0 +1,5 @@
+<caseFileItemDefinition name="bankincident" definitionType="http://www.omg.org/spec/CMMN/DefinitionType/Unspecified">
+    <property name="Customer_ID" type="http://www.omg.org/spec/CMMN/PropertyType/string"/>
+    <property name="Complaint_Detail" type="http://www.omg.org/spec/CMMN/PropertyType/string"/>
+    <property name="Category" type="http://www.omg.org/spec/CMMN/PropertyType/string"/>
+</caseFileItemDefinition>
