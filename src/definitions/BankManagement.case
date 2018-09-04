@@ -8,35 +8,9 @@
     </caseFileModel>
     <casePlanModel id="cm__r145c_0" name="BankManagement" autoComplete="true">
         <planItem id="pi__r145c_0" name="Registration" definitionRef="_r145c_0"/>
-        <planItem id="pi_ht__r145c_3" name="Validate" definitionRef="ht__r145c_3" entryCriteriaRefs="crit__r145c_2"/>
-        <planItem id="pi_pt__r145c_0" name="AssignIncharge" definitionRef="pt__r145c_0" entryCriteriaRefs="crit__r145c_3"/>
-        <planItem id="pi_ms__r145c_0" name="Invalid" definitionRef="ms__r145c_0" entryCriteriaRefs="crit__r145c_4"/>
+        <planItem id="pi__r145c_60" name="Validate and Assign" definitionRef="_r145c_60" entryCriteriaRefs="crit__r145c_2"/>
         <sentry id="crit__r145c_2" name="Sentry_2">
             <planItemOnPart id="_r145c_31" name="PlanItemOnPart_2" sourceRef="pi_ht__r145c_1">
-                <standardEvent>complete</standardEvent>
-            </planItemOnPart>
-        </sentry>
-        <sentry id="crit__r145c_3" name="Sentry_3">
-            <ifPart id="_r145c_32" name="IfPart_2" contextRef="_r145c_38">
-                <condition id="_r145c_33" name="Expression_3" language="spel">
-                    <body>
-                        <![CDATA[ValidationStatus.Status=="Valid"]]>
-                    </body>
-                </condition>
-            </ifPart>
-            <planItemOnPart id="_r145c_29" name="PlanItemOnPart_3" sourceRef="pi_ht__r145c_3">
-                <standardEvent>complete</standardEvent>
-            </planItemOnPart>
-        </sentry>
-        <sentry id="crit__r145c_4" name="Sentry_4">
-            <ifPart id="_r145c_43" name="IfPart_3" contextRef="_r145c_38">
-                <condition id="_r145c_44" name="Expression_4" language="spel">
-                    <body>
-                        <![CDATA[ValidationStatus.Status!="Valid"]]>
-                    </body>
-                </condition>
-            </ifPart>
-            <planItemOnPart id="_r145c_40" name="PlanItemOnPart_4" sourceRef="pi_ht__r145c_3">
                 <standardEvent>complete</standardEvent>
             </planItemOnPart>
         </sentry>
@@ -145,6 +119,35 @@
                     </condition>
                 </ifPart>
                 <planItemOnPart id="_r145c_23" name="PlanItemOnPart_1" sourceRef="pi_ht__r145c_0">
+                    <standardEvent>complete</standardEvent>
+                </planItemOnPart>
+            </sentry>
+        </stage>
+        <stage id="_r145c_60" name="Validate and Assign" autoComplete="true">
+            <planItem id="pi_ht__r145c_3" name="Validate" definitionRef="ht__r145c_3"/>
+            <planItem id="pi_pt__r145c_0" name="AssignIncharge" definitionRef="pt__r145c_0" entryCriteriaRefs="crit__r145c_3"/>
+            <planItem id="pi_ms__r145c_0" name="Invalid" definitionRef="ms__r145c_0" entryCriteriaRefs="crit__r145c_4"/>
+            <sentry id="crit__r145c_4" name="Sentry_4">
+                <ifPart id="_r145c_43" name="IfPart_3" contextRef="_r145c_38">
+                    <condition id="_r145c_44" name="Expression_4" language="spel">
+                        <body>
+                            <![CDATA[ValidationStatus.Status!="Valid"]]>
+                        </body>
+                    </condition>
+                </ifPart>
+                <planItemOnPart id="_r145c_40" name="PlanItemOnPart_4" sourceRef="pi_ht__r145c_3">
+                    <standardEvent>complete</standardEvent>
+                </planItemOnPart>
+            </sentry>
+            <sentry id="crit__r145c_3" name="Sentry_3">
+                <ifPart id="_r145c_32" name="IfPart_2" contextRef="_r145c_38">
+                    <condition id="_r145c_33" name="Expression_3" language="spel">
+                        <body>
+                            <![CDATA[ValidationStatus.Status=="Valid"]]>
+                        </body>
+                    </condition>
+                </ifPart>
+                <planItemOnPart id="_r145c_29" name="PlanItemOnPart_3" sourceRef="pi_ht__r145c_3">
                     <standardEvent>complete</standardEvent>
                 </planItemOnPart>
             </sentry>
