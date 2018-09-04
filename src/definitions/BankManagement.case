@@ -21,12 +21,12 @@
             </planItemOnPart>
         </sentry>
         <sentry id="crit__r145c_5" name="Sentry_5">
-            <planItemOnPart id="_r145c_69" name="PlanItemOnPart_6" sourceRef="pi_pt__r145c_0">
+            <planItemOnPart id="_r145c_2" name="PlanItemOnPart_6" sourceRef="pi_pt__r145c_0">
                 <standardEvent>complete</standardEvent>
             </planItemOnPart>
         </sentry>
         <sentry id="crit__r145c_6" name="Sentry_6">
-            <planItemOnPart id="_r145c_76" name="PlanItemOnPart_7" sourceRef="pi_ht__r145c_4">
+            <planItemOnPart id="_r145c_57" name="PlanItemOnPart_7" sourceRef="pi_ht__r145c_4">
                 <standardEvent>complete</standardEvent>
             </planItemOnPart>
         </sentry>
