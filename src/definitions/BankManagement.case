@@ -4,10 +4,42 @@
         <caseFileItem id="_r145c_13" name="ComplaintDetails" multiplicity="ExactlyOne" definitionRef="complaintdetails.cfid"/>
         <caseFileItem id="_r145c_22" name="SignUp" multiplicity="ExactlyOne" definitionRef="signup.cfid"/>
         <caseFileItem id="_r145c_38" name="ValidationStatus" multiplicity="ExactlyOne" definitionRef="validationstatus.cfid"/>
+        <caseFileItem id="_r145c_52" name="Incharge" multiplicity="ExactlyOne" definitionRef="incharge_1.cfid"/>
     </caseFileModel>
     <casePlanModel id="cm__r145c_0" name="BankManagement" autoComplete="true">
         <planItem id="pi__r145c_0" name="Registration" definitionRef="_r145c_0"/>
-        <planItem id="pi__r145c_31" name="Validate and Assign " definitionRef="_r145c_31"/>
+        <planItem id="pi_ht__r145c_3" name="Validate" definitionRef="ht__r145c_3" entryCriteriaRefs="crit__r145c_2"/>
+        <planItem id="pi_pt__r145c_0" name="AssignIncharge" definitionRef="pt__r145c_0" entryCriteriaRefs="crit__r145c_3"/>
+        <planItem id="pi_ms__r145c_0" name="Invalid" definitionRef="ms__r145c_0" entryCriteriaRefs="crit__r145c_4"/>
+        <sentry id="crit__r145c_2" name="Sentry_2">
+            <planItemOnPart id="_r145c_31" name="PlanItemOnPart_2" sourceRef="pi_ht__r145c_1">
+                <standardEvent>complete</standardEvent>
+            </planItemOnPart>
+        </sentry>
+        <sentry id="crit__r145c_3" name="Sentry_3">
+            <ifPart id="_r145c_32" name="IfPart_2" contextRef="_r145c_38">
+                <condition id="_r145c_33" name="Expression_3" language="spel">
+                    <body>
+                        <![CDATA[ValidationStatus.Status=="Valid"]]>
+                    </body>
+                </condition>
+            </ifPart>
+            <planItemOnPart id="_r145c_29" name="PlanItemOnPart_3" sourceRef="pi_ht__r145c_3">
+                <standardEvent>complete</standardEvent>
+            </planItemOnPart>
+        </sentry>
+        <sentry id="crit__r145c_4" name="Sentry_4">
+            <ifPart id="_r145c_43" name="IfPart_3" contextRef="_r145c_38">
+                <condition id="_r145c_44" name="Expression_4" language="spel">
+                    <body>
+                        <![CDATA[ValidationStatus.Status!="Valid"]]>
+                    </body>
+                </condition>
+            </ifPart>
+            <planItemOnPart id="_r145c_40" name="PlanItemOnPart_4" sourceRef="pi_ht__r145c_3">
+                <standardEvent>complete</standardEvent>
+            </planItemOnPart>
+        </sentry>
         <humanTask id="ht__r145c_0" name="CustomerType" isBlocking="true">
             <inputs id="_r145c_5" name="CustomerType" bindingRef="_r145c_4"/>
             <outputs id="_r145c_7" name="CustomerType" bindingRef="_r145c_4">
@@ -32,7 +64,11 @@
             <inputs id="_r145c_16" name="ComplaintDetails" bindingRef="_r145c_13"/>
             <inputs id="_r145c_20" name="CustomerType" bindingRef="_r145c_4"/>
             <inputs id="_r145c_36" name="CustomerID" bindingRef="_r145c_22"/>
-            <outputs id="_r145c_21" name="ComplaintDetails" bindingRef="_r145c_13"/>
+            <outputs id="_r145c_21" name="ComplaintDetails" bindingRef="_r145c_13">
+                <extensionElements mustUnderstand="false">
+                    <cafienne:implementation xmlns:cafienne="org.cafienne" required="true"/>
+                </extensionElements>
+            </outputs>
             <extensionElements mustUnderstand="false">
                 <cafienne:implementation xmlns:cafienne="org.cafienne" humanTaskRef="RaiseAComplaint.humantask">
                     <parameterMapping id="_r145c_17" sourceRef="_r145c_16" targetRef="_kaHF_ComplaintDetails"/>
@@ -42,32 +78,48 @@
         </humanTask>
         <humanTask id="ht__r145c_2" name="SignUp" isBlocking="true">
             <inputs id="_r145c_26" name="SignUp" bindingRef="_r145c_22"/>
-            <outputs id="_r145c_28" name="SignUp" bindingRef="_r145c_22"/>
-            <outputs id="_r145c_34" name="CustomerID" bindingRef="_r145c_22"/>
             <extensionElements mustUnderstand="false">
                 <cafienne:implementation xmlns:cafienne="org.cafienne" humanTaskRef="SignUp.humantask">
                     <parameterMapping id="_r145c_27" sourceRef="_r145c_26" targetRef="_lIyM_SignUp"/>
-                    <parameterMapping id="_r145c_29" sourceRef="_7Tx0_SignUp" targetRef="_r145c_28"/>
-                    <parameterMapping id="_r145c_32" sourceRef="_OT5y_CustomerID" targetRef="_r145c_34">
-                        <transformation id="_r145c_33" name="Expression_3" language="spel">
-                            <body>
-                                <![CDATA[SignUp.CustomerID]]>
-                            </body>
-                        </transformation>
-                    </parameterMapping>
                 </cafienne:implementation>
             </extensionElements>
         </humanTask>
         <humanTask id="ht__r145c_3" name="Validate" isBlocking="true">
             <inputs id="_r145c_45" name="ComplaintDetails" bindingRef="_r145c_13"/>
-            <outputs id="_r145c_47" name="ValidationStatus" bindingRef="_r145c_38"/>
+            <inputs id="_r145c_41" name="ValidationStatus" bindingRef="_r145c_38"/>
+            <inputs id="_r145c_61" name="Category" bindingRef="_r145c_13"/>
+            <outputs id="_r145c_47" name="ValidationStatus" bindingRef="_r145c_38">
+                <extensionElements mustUnderstand="false">
+                    <cafienne:implementation xmlns:cafienne="org.cafienne" required="true"/>
+                </extensionElements>
+            </outputs>
+            <outputs id="_r145c_59" name="ComplaintDetails" bindingRef="_r145c_13"/>
             <extensionElements mustUnderstand="false">
                 <cafienne:implementation xmlns:cafienne="org.cafienne" humanTaskRef="Validate.humantask">
-                    <parameterMapping id="_r145c_46" sourceRef="_r145c_45" targetRef="_YbgD_ComplaintDetails"/>
                     <parameterMapping id="_r145c_48" sourceRef="_K4gi_ValidationStatus" targetRef="_r145c_47"/>
+                    <parameterMapping id="_r145c_2" sourceRef="_r145c_41" targetRef="_8KyA_ValidationStatus"/>
+                    <parameterMapping id="_r145c_1" sourceRef="_r145c_45" targetRef="_YbgD_ComplaintDetails"/>
+                    <parameterMapping id="_r145c_58" sourceRef="_4qEX_ComplaintDetails" targetRef="_r145c_59"/>
                 </cafienne:implementation>
             </extensionElements>
         </humanTask>
+        <processTask id="pt__r145c_0" name="AssignIncharge" isBlocking="true" processRef="AssignIncharge.process">
+            <inputs id="_r145c_53" name="Category" bindingRef="_r145c_13"/>
+            <inputs id="_r145c_49" name="ComplaintDetails" bindingRef="_r145c_13"/>
+            <inputs id="_r145c_54" name="ValidationStatus" bindingRef="_r145c_38"/>
+            <outputs id="_r145c_55" name="Incharge" bindingRef="_r145c_52"/>
+            <parameterMapping id="_r145c_56" sourceRef="_nlkZ_Incharge" targetRef="_r145c_55"/>
+            <parameterMapping id="_r145c_46" sourceRef="_r145c_49" targetRef="_48oF_BankIncident"/>
+            <parameterMapping id="_r145c_50" sourceRef="_r145c_54" targetRef="_0wTr_ValidationStatus"/>
+            <parameterMapping id="_r145c_51" sourceRef="_r145c_53" targetRef="_SFbs_Category">
+                <transformation id="_r145c_57" name="Expression_5" language="spel">
+                    <body>
+                        <![CDATA[ComplaintDetails.Category]]>
+                    </body>
+                </transformation>
+            </parameterMapping>
+        </processTask>
+        <milestone id="ms__r145c_0" name="Invalid"/>
         <stage id="_r145c_0" name="Registration" autoComplete="true">
             <planItem id="pi_ht__r145c_0" name="CustomerType" definitionRef="ht__r145c_0"/>
             <planItem id="pi_ht__r145c_1" name="RaiseAComplaint" definitionRef="ht__r145c_1" entryCriteriaRefs="crit__r145c_0"/>
@@ -97,13 +149,12 @@
                 </planItemOnPart>
             </sentry>
         </stage>
-        <stage id="_r145c_31" name="Validate and Assign " autoComplete="true">
-            <planItem id="pi_ht__r145c_3" name="Validate" definitionRef="ht__r145c_3"/>
-        </stage>
     </casePlanModel>
     <input id="_r145c_3" name="CustomerType" bindingRef="_r145c_4"/>
     <input id="_r145c_18" name="ComplaintDetails" bindingRef="_r145c_13"/>
     <input id="_r145c_30" name="SignUp" bindingRef="_r145c_22"/>
+    <input id="_r145c_42" name="ValidationStatus" bindingRef="_r145c_38"/>
+    <input id="_r145c_63" name="Incharge" bindingRef="_r145c_52"/>
     <extensionElements mustUnderstand="false">
         <cafienne:start-case-model xmlns:cafienne="org.cafienne">{
 	"schema": {
