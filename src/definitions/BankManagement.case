@@ -5,15 +5,28 @@
         <caseFileItem id="_r145c_22" name="SignUp" multiplicity="ExactlyOne" definitionRef="signup.cfid"/>
         <caseFileItem id="_r145c_38" name="ValidationStatus" multiplicity="ExactlyOne" definitionRef="validationstatus.cfid"/>
         <caseFileItem id="_r145c_52" name="Incharge" multiplicity="ExactlyOne" definitionRef="incharge_1.cfid"/>
+        <caseFileItem id="_r145c_67" name="WorkStatus" multiplicity="ExactlyOne" definitionRef="workstatus.cfid"/>
     </caseFileModel>
     <casePlanModel id="cm__r145c_0" name="BankManagement" autoComplete="true">
         <planItem id="pi__r145c_0" name="Registration" definitionRef="_r145c_0"/>
         <planItem id="pi__r145c_60" name="Validate and Assign" definitionRef="_r145c_60" entryCriteriaRefs="crit__r145c_2"/>
+        <planItem id="pi_ht__r145c_4" name="ResolveIssue" definitionRef="ht__r145c_4" entryCriteriaRefs="crit__r145c_5"/>
+        <planItem id="pi_ht__r145c_5" name="test1" definitionRef="ht__r145c_5" entryCriteriaRefs="crit__r145c_6"/>
         <sentry id="crit__r145c_2" name="Sentry_2">
             <planItemOnPart id="_r145c_31" name="PlanItemOnPart_2" sourceRef="pi_ht__r145c_1">
                 <standardEvent>complete</standardEvent>
             </planItemOnPart>
             <planItemOnPart id="_r145c_55" name="PlanItemOnPart_5" sourceRef="pi__r145c_0">
+                <standardEvent>complete</standardEvent>
+            </planItemOnPart>
+        </sentry>
+        <sentry id="crit__r145c_5" name="Sentry_5">
+            <planItemOnPart id="_r145c_69" name="PlanItemOnPart_6" sourceRef="pi_pt__r145c_0">
+                <standardEvent>complete</standardEvent>
+            </planItemOnPart>
+        </sentry>
+        <sentry id="crit__r145c_6" name="Sentry_6">
+            <planItemOnPart id="_r145c_76" name="PlanItemOnPart_7" sourceRef="pi_ht__r145c_4">
                 <standardEvent>complete</standardEvent>
             </planItemOnPart>
         </sentry>
@@ -83,8 +96,32 @@
                 </cafienne:implementation>
             </extensionElements>
         </humanTask>
+        <humanTask id="ht__r145c_4" name="ResolveIssue" isBlocking="true">
+            <inputs id="_r145c_62" name="ComplaintDetails" bindingRef="_r145c_13"/>
+            <inputs id="_r145c_65" name="Incharge"/>
+            <inputs id="_r145c_68" name="Assignee" bindingRef="_r145c_52"/>
+            <outputs id="_r145c_70" name="WorkStatus" bindingRef="_r145c_67"/>
+            <outputs id="_r145c_78" name="ComplaintDetails" bindingRef="_r145c_13"/>
+            <extensionElements mustUnderstand="false">
+                <cafienne:implementation xmlns:cafienne="org.cafienne" humanTaskRef="WorkStatus.humantask">
+                    <parameterMapping id="_r145c_71" sourceRef="_24uj_WorkStatus" targetRef="_r145c_70"/>
+                    <parameterMapping id="_r145c_64" sourceRef="_r145c_62" targetRef="_WUqP_ComplaintDetails"/>
+                    <parameterMapping id="_r145c_66" sourceRef="_r145c_68" targetRef="_6Jll_Assignee"/>
+                    <parameterMapping id="_r145c_77" sourceRef="_Mp1I_ComplaintDetails" targetRef="_r145c_78"/>
+                </cafienne:implementation>
+            </extensionElements>
+        </humanTask>
+        <humanTask id="ht__r145c_5" name="test1" isBlocking="true">
+            <inputs id="_r145c_73" name="ComplaintDetails" bindingRef="_r145c_13"/>
+            <extensionElements mustUnderstand="false">
+                <cafienne:implementation xmlns:cafienne="org.cafienne" humanTaskRef="testing.humantask">
+                    <parameterMapping id="_r145c_74" sourceRef="_r145c_73" targetRef="_UAC5_ComplaintDetails"/>
+                </cafienne:implementation>
+            </extensionElements>
+        </humanTask>
         <processTask id="pt__r145c_0" name="Assign" isBlocking="true" processRef="Incharge.process">
             <inputs id="_r145c_37" name="Category" bindingRef="_r145c_13"/>
+            <inputs id="_r145c_56" name="ComplaintDetails" bindingRef="_r145c_13"/>
             <outputs id="_r145c_46" name="Incharge" bindingRef="_r145c_52"/>
             <parameterMapping id="_r145c_39" sourceRef="_r145c_37" targetRef="_BXwK_Category">
                 <transformation id="_r145c_50" name="Expression_3" language="spel">
@@ -94,6 +131,7 @@
                 </transformation>
             </parameterMapping>
             <parameterMapping id="_r145c_49" sourceRef="_QSTt_Incharge" targetRef="_r145c_46"/>
+            <parameterMapping id="_r145c_35" sourceRef="_r145c_56" targetRef="_5pA9_ComplaintDetails"/>
         </processTask>
         <milestone id="ms__r145c_0" name="Invalid"/>
         <stage id="_r145c_0" name="Registration" autoComplete="true">
@@ -160,6 +198,7 @@
     <input id="_r145c_30" name="SignUp" bindingRef="_r145c_22"/>
     <input id="_r145c_42" name="ValidationStatus" bindingRef="_r145c_38"/>
     <input id="_r145c_63" name="Incharge" bindingRef="_r145c_52"/>
+    <input id="_r145c_75" name="WorkStatus" bindingRef="_r145c_67"/>
     <extensionElements mustUnderstand="false">
         <cafienne:start-case-model xmlns:cafienne="org.cafienne">{
 	"schema": {
