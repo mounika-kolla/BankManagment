@@ -7,6 +7,7 @@
         <caseFileItem id="_r145c_52" name="Incharge" multiplicity="ExactlyOne" definitionRef="incharge_1.cfid"/>
         <caseFileItem id="_r145c_67" name="WorkStatus" multiplicity="ExactlyOne" definitionRef="workstatus.cfid"/>
         <caseFileItem id="_r145c_88" name="Message" multiplicity="ExactlyOne" definitionRef="message.cfid"/>
+        <caseFileItem id="_r145c_108" name="Complete" multiplicity="ExactlyOne" definitionRef="complete.cfid"/>
     </caseFileModel>
     <casePlanModel id="cm__r145c_0" name="BankManagement" autoComplete="true">
         <planItem id="pi__r145c_0" name="Registration" definitionRef="_r145c_0"/>
@@ -22,6 +23,9 @@
         </sentry>
         <sentry id="crit__r145c_5" name="Sentry_5">
             <planItemOnPart id="_r145c_79" name="PlanItemOnPart_6" sourceRef="pi_pt__r145c_3">
+                <standardEvent>complete</standardEvent>
+            </planItemOnPart>
+            <planItemOnPart id="_r145c_14" name="PlanItemOnPart_8" sourceRef="pi__r145c_60">
                 <standardEvent>complete</standardEvent>
             </planItemOnPart>
         </sentry>
@@ -118,6 +122,11 @@
                 </cafienne:implementation>
             </extensionElements>
         </humanTask>
+        <humanTask id="ht__r145c_5" name="TaskComplete" isBlocking="true">
+            <extensionElements mustUnderstand="false">
+                <cafienne:implementation xmlns:cafienne="org.cafienne" humanTaskRef="TaskComplete.humantask"/>
+            </extensionElements>
+        </humanTask>
         <processTask id="pt__r145c_0" name="Assign" isBlocking="true" processRef="Incharge.process">
             <inputs id="_r145c_37" name="Category" bindingRef="_r145c_13"/>
             <inputs id="_r145c_56" name="ComplaintDetails" bindingRef="_r145c_13"/>
@@ -167,7 +176,6 @@
             <parameterMapping id="_r145c_107" sourceRef="_r145c_9" targetRef="_UFhd_Assignee"/>
         </processTask>
         <milestone id="ms__r145c_0" name="Invalid"/>
-        <milestone id="ms__r145c_1" name="Completed"/>
         <stage id="_r145c_0" name="Registration" autoComplete="true">
             <planItem id="pi_ht__r145c_0" name="CustomerType" definitionRef="ht__r145c_0"/>
             <planItem id="pi_ht__r145c_1" name="RaiseAComplaint" definitionRef="ht__r145c_1" entryCriteriaRefs="crit__r145c_0"/>
@@ -247,14 +255,14 @@
         <stage id="_r145c_2" name="Resolve In Progress" autoComplete="true">
             <planItem id="pi_ht__r145c_4" name="ResolveIssue" definitionRef="ht__r145c_4"/>
             <planItem id="pi_pt__r145c_2" name="NotifyWorkStatus" definitionRef="pt__r145c_2" entryCriteriaRefs="crit__r145c_6"/>
-            <planItem id="pi_ms__r145c_1" name="Completed" definitionRef="ms__r145c_1" entryCriteriaRefs="crit__r145c_9"/>
+            <planItem id="pi_ht__r145c_5" name="TaskComplete" definitionRef="ht__r145c_5" entryCriteriaRefs="crit__r145c_9"/>
             <sentry id="crit__r145c_6" name="Sentry_6">
                 <planItemOnPart id="_r145c_65" name="PlanItemOnPart_7" sourceRef="pi_ht__r145c_4">
                     <standardEvent>complete</standardEvent>
                 </planItemOnPart>
             </sentry>
             <sentry id="crit__r145c_9" name="Sentry_9">
-                <planItemOnPart id="_r145c_105" name="PlanItemOnPart_11" sourceRef="pi_pt__r145c_2">
+                <planItemOnPart id="_r145c_109" name="PlanItemOnPart_11" sourceRef="pi_pt__r145c_2">
                     <standardEvent>complete</standardEvent>
                 </planItemOnPart>
             </sentry>
