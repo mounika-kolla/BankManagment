@@ -127,6 +127,18 @@
                 <cafienne:implementation xmlns:cafienne="org.cafienne" humanTaskRef="TaskComplete.humantask"/>
             </extensionElements>
         </humanTask>
+        <humanTask id="ht__r145c_7" name="WorkStatusMessage" isBlocking="true">
+            <inputs id="_r145c_111" name="WorkStatus" bindingRef="_r145c_67"/>
+            <outputs id="_r145c_113" name="Message" bindingRef="_r145c_88"/>
+            <outputs id="_r145c_115" name="WorkStatus" bindingRef="_r145c_67"/>
+            <extensionElements mustUnderstand="false">
+                <cafienne:implementation xmlns:cafienne="org.cafienne" humanTaskRef="WorkStatusMessage.humantask">
+                    <parameterMapping id="_r145c_112" sourceRef="_r145c_111" targetRef="_DAlg_WorkStatus"/>
+                    <parameterMapping id="_r145c_114" sourceRef="_wz4c_Message" targetRef="_r145c_113"/>
+                    <parameterMapping id="_r145c_116" sourceRef="_K7p3_WorkStatus" targetRef="_r145c_115"/>
+                </cafienne:implementation>
+            </extensionElements>
+        </humanTask>
         <processTask id="pt__r145c_0" name="Assign" isBlocking="true" processRef="Incharge.process">
             <inputs id="_r145c_37" name="Category" bindingRef="_r145c_13"/>
             <inputs id="_r145c_56" name="ComplaintDetails" bindingRef="_r145c_13"/>
@@ -174,6 +186,24 @@
         <processTask id="pt__r145c_3" name="NotifyAssign" isBlocking="true" processRef="NotifyAssign.process">
             <inputs id="_r145c_9" name="Assignee" bindingRef="_r145c_52"/>
             <parameterMapping id="_r145c_107" sourceRef="_r145c_9" targetRef="_UFhd_Assignee"/>
+        </processTask>
+        <processTask id="pt__r145c_4" name="FurtherDetailNoitification" isBlocking="true" processRef="FurtherDetailNoitification.process">
+            <inputs id="_r145c_118" name="WorkStatus" bindingRef="_r145c_67"/>
+            <inputs id="_r145c_120" name="Message" bindingRef="_r145c_88"/>
+            <parameterMapping id="_r145c_119" sourceRef="_r145c_118" targetRef="_xKUN_WorkStatus">
+                <transformation id="_r145c_131" name="Expression_11" language="spel">
+                    <body>
+                        <![CDATA[WorkStatus.IssueStatus]]>
+                    </body>
+                </transformation>
+            </parameterMapping>
+            <parameterMapping id="_r145c_121" sourceRef="_r145c_120" targetRef="_FJ2m_Message">
+                <transformation id="_r145c_132" name="Expression_12" language="spel">
+                    <body>
+                        <![CDATA[Message.MessageContent]]>
+                    </body>
+                </transformation>
+            </parameterMapping>
         </processTask>
         <milestone id="ms__r145c_0" name="Invalid"/>
         <stage id="_r145c_0" name="Registration" autoComplete="true">
@@ -255,14 +285,48 @@
         <stage id="_r145c_2" name="Resolve In Progress" autoComplete="true">
             <planItem id="pi_ht__r145c_4" name="ResolveIssue" definitionRef="ht__r145c_4"/>
             <planItem id="pi_pt__r145c_2" name="NotifyWorkStatus" definitionRef="pt__r145c_2" entryCriteriaRefs="crit__r145c_6"/>
-            <planItem id="pi_ht__r145c_5" name="TaskComplete" definitionRef="ht__r145c_5" entryCriteriaRefs="crit__r145c_9"/>
+            <planItem id="pi_ht__r145c_5" name="TaskComplete" definitionRef="ht__r145c_5" entryCriteriaRefs="crit__r145c_9 crit__r145c_13"/>
+            <planItem id="pi_ht__r145c_7" name="WorkStatusMessage" definitionRef="ht__r145c_7" entryCriteriaRefs="crit__r145c_12"/>
+            <planItem id="pi_pt__r145c_4" name="FurtherDetailNoitification" definitionRef="pt__r145c_4" entryCriteriaRefs="crit__r145c_11"/>
             <sentry id="crit__r145c_6" name="Sentry_6">
+                <ifPart id="_r145c_127" name="IfPart_5" contextRef="_r145c_67">
+                    <condition id="_r145c_128" name="Expression_10" language="spel">
+                        <body>
+                            <![CDATA[WorkStatus.IssueStatus!="Need_Further_Information"]]>
+                        </body>
+                    </condition>
+                </ifPart>
                 <planItemOnPart id="_r145c_65" name="PlanItemOnPart_7" sourceRef="pi_ht__r145c_4">
                     <standardEvent>complete</standardEvent>
                 </planItemOnPart>
             </sentry>
             <sentry id="crit__r145c_9" name="Sentry_9">
                 <planItemOnPart id="_r145c_109" name="PlanItemOnPart_11" sourceRef="pi_pt__r145c_2">
+                    <standardEvent>complete</standardEvent>
+                </planItemOnPart>
+            </sentry>
+            <sentry id="crit__r145c_11" name="Sentry_11">
+                <planItemOnPart id="_r145c_122" name="PlanItemOnPart_13" sourceRef="pi_ht__r145c_7">
+                    <standardEvent>complete</standardEvent>
+                </planItemOnPart>
+                <planItemOnPart id="_r145c_28" name="PlanItemOnPart_15" sourceRef="pi__r145c_0">
+                    <standardEvent>complete</standardEvent>
+                </planItemOnPart>
+            </sentry>
+            <sentry id="crit__r145c_12" name="Sentry_12">
+                <ifPart id="_r145c_124" name="IfPart_4" contextRef="_r145c_67">
+                    <condition id="_r145c_125" name="Expression_9" language="spel">
+                        <body>
+                            <![CDATA[WorkStatus.IssueStatus=="Need_Further_Information"]]>
+                        </body>
+                    </condition>
+                </ifPart>
+                <planItemOnPart id="_r145c_123" name="PlanItemOnPart_14" sourceRef="pi_ht__r145c_4">
+                    <standardEvent>complete</standardEvent>
+                </planItemOnPart>
+            </sentry>
+            <sentry id="crit__r145c_13" name="Sentry_13">
+                <planItemOnPart id="_r145c_129" name="PlanItemOnPart_16" sourceRef="pi_pt__r145c_4">
                     <standardEvent>complete</standardEvent>
                 </planItemOnPart>
             </sentry>
@@ -275,6 +339,7 @@
     <input id="_r145c_63" name="Incharge" bindingRef="_r145c_52"/>
     <input id="_r145c_75" name="WorkStatus" bindingRef="_r145c_67"/>
     <input id="_r145c_104" name="Message" bindingRef="_r145c_88"/>
+    <input id="_r145c_130" name="Complete" bindingRef="_r145c_108"/>
     <extensionElements mustUnderstand="false">
         <cafienne:start-case-model xmlns:cafienne="org.cafienne">{
 	"schema": {
