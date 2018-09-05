@@ -149,8 +149,20 @@
             <inputs id="_r145c_85" name="ValidationStatus" bindingRef="_r145c_38"/>
             <inputs id="_r145c_102" name="MessageContent" bindingRef="_r145c_88"/>
             <inputs id="_r145c_87" name="Message" bindingRef="_r145c_88"/>
-            <parameterMapping id="_r145c_84" sourceRef="_r145c_85" targetRef="_Ttv4_Assign_Status"/>
-            <parameterMapping id="_r145c_101" sourceRef="_r145c_87" targetRef="_0erg_MessageContent"/>
+            <parameterMapping id="_r145c_84" sourceRef="_r145c_85" targetRef="_Ttv4_Assign_Status">
+                <transformation id="_r145c_90" name="Expression_6" language="spel">
+                    <body>
+                        <![CDATA[ValidationStatus.Status]]>
+                    </body>
+                </transformation>
+            </parameterMapping>
+            <parameterMapping id="_r145c_101" sourceRef="_r145c_87" targetRef="_0erg_MessageContent">
+                <transformation id="_r145c_98" name="Expression_7" language="spel">
+                    <body>
+                        <![CDATA[Message.MessageContent]]>
+                    </body>
+                </transformation>
+            </parameterMapping>
         </processTask>
         <milestone id="ms__r145c_0" name="Invalid"/>
         <stage id="_r145c_0" name="Registration" autoComplete="true">
