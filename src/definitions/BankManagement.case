@@ -21,10 +21,7 @@
             </planItemOnPart>
         </sentry>
         <sentry id="crit__r145c_5" name="Sentry_5">
-            <planItemOnPart id="_r145c_79" name="PlanItemOnPart_6" sourceRef="pi_pt__r145c_0">
-                <standardEvent>complete</standardEvent>
-            </planItemOnPart>
-            <planItemOnPart id="_r145c_9" name="PlanItemOnPart_8" sourceRef="pi__r145c_60">
+            <planItemOnPart id="_r145c_79" name="PlanItemOnPart_6" sourceRef="pi_pt__r145c_3">
                 <standardEvent>complete</standardEvent>
             </planItemOnPart>
         </sentry>
@@ -165,7 +162,12 @@
                 </transformation>
             </parameterMapping>
         </processTask>
+        <processTask id="pt__r145c_3" name="NotifyAssign" isBlocking="true" processRef="NotifyAssign.process">
+            <inputs id="_r145c_9" name="Assignee" bindingRef="_r145c_52"/>
+            <parameterMapping id="_r145c_107" sourceRef="_r145c_9" targetRef="_UFhd_Assignee"/>
+        </processTask>
         <milestone id="ms__r145c_0" name="Invalid"/>
+        <milestone id="ms__r145c_1" name="Completed"/>
         <stage id="_r145c_0" name="Registration" autoComplete="true">
             <planItem id="pi_ht__r145c_0" name="CustomerType" definitionRef="ht__r145c_0"/>
             <planItem id="pi_ht__r145c_1" name="RaiseAComplaint" definitionRef="ht__r145c_1" entryCriteriaRefs="crit__r145c_0"/>
@@ -201,6 +203,7 @@
             <planItem id="pi_pt__r145c_0" name="Assign" definitionRef="pt__r145c_0" entryCriteriaRefs="crit__r145c_3"/>
             <planItem id="pi_pt__r145c_1" name="NotifyStatus" definitionRef="pt__r145c_1" entryCriteriaRefs="crit__r145c_8"/>
             <planItem id="pi_ht__r145c_6" name="AddMessage" definitionRef="ht__r145c_6" entryCriteriaRefs="crit__r145c_7"/>
+            <planItem id="pi_pt__r145c_3" name="NotifyAssign" definitionRef="pt__r145c_3" entryCriteriaRefs="crit__r145c_10"/>
             <sentry id="crit__r145c_4" name="Sentry_4">
                 <ifPart id="_r145c_43" name="IfPart_3" contextRef="_r145c_38">
                     <condition id="_r145c_44" name="Expression_4" language="spel">
@@ -235,6 +238,11 @@
                     <standardEvent>complete</standardEvent>
                 </planItemOnPart>
             </sentry>
+            <sentry id="crit__r145c_10" name="Sentry_10">
+                <planItemOnPart id="_r145c_106" name="PlanItemOnPart_12" sourceRef="pi_pt__r145c_0">
+                    <standardEvent>complete</standardEvent>
+                </planItemOnPart>
+            </sentry>
         </stage>
         <stage id="_r145c_2" name="Resolve In Progress" autoComplete="true">
             <planItem id="pi_ht__r145c_4" name="ResolveIssue" definitionRef="ht__r145c_4"/>
@@ -251,7 +259,6 @@
                 </planItemOnPart>
             </sentry>
         </stage>
-        <milestone id="ms__r145c_1" name="Completed"/>
     </casePlanModel>
     <input id="_r145c_3" name="CustomerType" bindingRef="_r145c_4"/>
     <input id="_r145c_18" name="ComplaintDetails" bindingRef="_r145c_13"/>
