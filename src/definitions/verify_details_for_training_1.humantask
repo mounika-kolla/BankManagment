@@ -29,9 +29,9 @@
 	    "IT Returns",
 	    "Facility Request" ],
 	  "enum": [
-	      "Quaterly Statement",
-	    "IT Returns",
-	    "Facility Request" ]
+	      "Quarterly_Statement",
+	    "IT_Returns",
+	    "Facility_Request" ]
          }
         }
        },

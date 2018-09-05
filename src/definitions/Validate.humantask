@@ -1,25 +1,25 @@
 <humantask>
-    <cafienne:implementation xmlns:cafienne="org.cafienne" name="Validate_Complaint" description="Validate_Complaint" class="org.cafienne.cmmn.definition.task.WorkflowTaskDefinition">
-        <input id="_vp0p_BankIncident" name="BankIncident"/>
-        <output id="_hQIp_ValidationResponse" name="ValidationResponse"/>
-        <output id="_6Jm9_BankIncident" name="BankIncident"/>
+    <cafienne:implementation xmlns:cafienne="org.cafienne" name="Validate" description="Validate" class="org.cafienne.cmmn.definition.task.WorkflowTaskDefinition">
+        <input id="_YbgD_ComplaintDetails" name="ComplaintDetails"/>
+        <output id="_K4gi_ValidationStatus" name="ValidationStatus"/>
+        <output id="_4qEX_ComplaintDetails" name="ComplaintDetails"/>
         <task-model>{
 	"schema": {
-		"title": "BankIncident",
+		"title": "Bank",
 		"type": "object",
-		"required": [
-			"BankIncident"
-		],
+		"required": ["ValidationStatus"],
 		"properties": {
-			"BankIncident": {
-				"title": "BankIncident",
+			"ComplaintDetails": {
+				"title": "ComplaintDetails",
 				"type": "object",
+				"required": ["CustomerID", "ComplaintSummary", "Category"],
 				"properties": {
+
 					"CustomerID": {
-						"type": "string",
+						"type": "integer",
 						"title": "Customer ID"
 					},
-					"ComplaintDetails": {
+					"ComplaintSummary": {
 						"type": "string",
 						"title": "Summary of Complaint"
 					},
@@ -32,15 +32,15 @@
 							"Internet_Banking"
 						],
 						"enumNames": [
-							"Credit card",
-							"Debit card",
-							"Internet banking"
+							"Credit Card",
+							"Debit Card",
+							"Internet Banking"
 						]
 					}
 				}
 			},
-			"ValidationResponse": {
-				"title": "ValidationResponse",
+			"ValidationStatus": {
+				"title": "ValidationStatus",
 				"type": "object",
 				"properties": {
 					"Status": {
