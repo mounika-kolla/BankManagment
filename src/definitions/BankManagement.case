@@ -11,7 +11,7 @@
     <casePlanModel id="cm__r145c_0" name="BankManagement" autoComplete="true">
         <planItem id="pi__r145c_0" name="Registration" definitionRef="_r145c_0"/>
         <planItem id="pi__r145c_60" name="Validate and Assign" definitionRef="_r145c_60" entryCriteriaRefs="crit__r145c_2"/>
-        <planItem id="pi__r145c_2" name="Resolving Issues" definitionRef="_r145c_2" entryCriteriaRefs="crit__r145c_5"/>
+        <planItem id="pi__r145c_2" name="Resolve In Progress" definitionRef="_r145c_2" entryCriteriaRefs="crit__r145c_5"/>
         <sentry id="crit__r145c_2" name="Sentry_2">
             <planItemOnPart id="_r145c_31" name="PlanItemOnPart_2" sourceRef="pi_ht__r145c_1">
                 <standardEvent>complete</standardEvent>
@@ -96,7 +96,6 @@
         </humanTask>
         <humanTask id="ht__r145c_4" name="ResolveIssue" isBlocking="true">
             <inputs id="_r145c_62" name="ComplaintDetails" bindingRef="_r145c_13"/>
-            <inputs id="_r145c_65" name="Incharge"/>
             <inputs id="_r145c_68" name="Assignee" bindingRef="_r145c_52"/>
             <outputs id="_r145c_70" name="WorkStatus" bindingRef="_r145c_67"/>
             <outputs id="_r145c_78" name="ComplaintDetails" bindingRef="_r145c_13"/>
@@ -106,14 +105,6 @@
                     <parameterMapping id="_r145c_64" sourceRef="_r145c_62" targetRef="_WUqP_ComplaintDetails"/>
                     <parameterMapping id="_r145c_66" sourceRef="_r145c_68" targetRef="_6Jll_Assignee"/>
                     <parameterMapping id="_r145c_77" sourceRef="_Mp1I_ComplaintDetails" targetRef="_r145c_78"/>
-                </cafienne:implementation>
-            </extensionElements>
-        </humanTask>
-        <humanTask id="ht__r145c_5" name="test1" isBlocking="true">
-            <inputs id="_r145c_73" name="ComplaintDetails" bindingRef="_r145c_13"/>
-            <extensionElements mustUnderstand="false">
-                <cafienne:implementation xmlns:cafienne="org.cafienne" humanTaskRef="testing.humantask">
-                    <parameterMapping id="_r145c_74" sourceRef="_r145c_73" targetRef="_UAC5_ComplaintDetails"/>
                 </cafienne:implementation>
             </extensionElements>
         </humanTask>
@@ -160,6 +151,16 @@
                 <transformation id="_r145c_98" name="Expression_7" language="spel">
                     <body>
                         <![CDATA[Message.MessageContent]]>
+                    </body>
+                </transformation>
+            </parameterMapping>
+        </processTask>
+        <processTask id="pt__r145c_2" name="NotifyWorkStatus" isBlocking="true" processRef="NotifyWorkStatus.process">
+            <inputs id="_r145c_81" name="WorkStatus" bindingRef="_r145c_67"/>
+            <parameterMapping id="_r145c_82" sourceRef="_r145c_81" targetRef="_rjEA_WorkStatus">
+                <transformation id="_r145c_86" name="Expression_8" language="spel">
+                    <body>
+                        <![CDATA[WorkStatus.IssueStatus]]>
                     </body>
                 </transformation>
             </parameterMapping>
@@ -235,15 +236,22 @@
                 </planItemOnPart>
             </sentry>
         </stage>
-        <stage id="_r145c_2" name="Resolving Issues" autoComplete="true">
+        <stage id="_r145c_2" name="Resolve In Progress" autoComplete="true">
             <planItem id="pi_ht__r145c_4" name="ResolveIssue" definitionRef="ht__r145c_4"/>
-            <planItem id="pi_ht__r145c_5" name="test1" definitionRef="ht__r145c_5" entryCriteriaRefs="crit__r145c_6"/>
+            <planItem id="pi_pt__r145c_2" name="NotifyWorkStatus" definitionRef="pt__r145c_2" entryCriteriaRefs="crit__r145c_6"/>
+            <planItem id="pi_ms__r145c_1" name="Completed" definitionRef="ms__r145c_1" entryCriteriaRefs="crit__r145c_9"/>
             <sentry id="crit__r145c_6" name="Sentry_6">
-                <planItemOnPart id="_r145c_80" name="PlanItemOnPart_7" sourceRef="pi_ht__r145c_4">
+                <planItemOnPart id="_r145c_65" name="PlanItemOnPart_7" sourceRef="pi_ht__r145c_4">
+                    <standardEvent>complete</standardEvent>
+                </planItemOnPart>
+            </sentry>
+            <sentry id="crit__r145c_9" name="Sentry_9">
+                <planItemOnPart id="_r145c_105" name="PlanItemOnPart_11" sourceRef="pi_pt__r145c_2">
                     <standardEvent>complete</standardEvent>
                 </planItemOnPart>
             </sentry>
         </stage>
+        <milestone id="ms__r145c_1" name="Completed"/>
     </casePlanModel>
     <input id="_r145c_3" name="CustomerType" bindingRef="_r145c_4"/>
     <input id="_r145c_18" name="ComplaintDetails" bindingRef="_r145c_13"/>
