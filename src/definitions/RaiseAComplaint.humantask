@@ -2,6 +2,7 @@
     <cafienne:implementation xmlns:cafienne="org.cafienne" name="RaiseAComplaint" description="RaiseAComplaint" class="org.cafienne.cmmn.definition.task.WorkflowTaskDefinition">
         <input id="_kaHF_ComplaintDetails" name="ComplaintDetails"/>
         <output id="_Urkz_ComplaintDetails" name="ComplaintDetails"/>
+        <input id="_vMss_CustomerId" name="CustomerId"/>
         <task-model>{
 	"schema": {
 		"title": "Bank",

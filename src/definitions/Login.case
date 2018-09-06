@@ -16,12 +16,12 @@
             </extensionElements>
         </humanTask>
         <humanTask id="ht__3rEdr_1" name="FillForm" isBlocking="true">
-            <inputs id="_3rEdr_12" name="GuideRequest"/>
-            <outputs id="_3rEdr_14" name="GuideRequest"/>
+            <inputs id="_3rEdr_16" name="UserType"/>
+            <outputs id="_3rEdr_18" name="UserType"/>
             <extensionElements mustUnderstand="false">
-                <cafienne:implementation xmlns:cafienne="org.cafienne" humanTaskRef="FillForm.humantask">
-                    <parameterMapping id="_3rEdr_13" sourceRef="_3rEdr_12" targetRef="_l3gj_GuideRequest"/>
-                    <parameterMapping id="_3rEdr_20" sourceRef="_FRd0_GuideRequest" targetRef="_3rEdr_14"/>
+                <cafienne:implementation xmlns:cafienne="org.cafienne" humanTaskRef="Login.humantask">
+                    <parameterMapping id="_3rEdr_17" sourceRef="_3rEdr_16" targetRef="_I3en_UserType"/>
+                    <parameterMapping id="_3rEdr_19" sourceRef="_qHuz_UserType" targetRef="_3rEdr_18"/>
                 </cafienne:implementation>
             </extensionElements>
         </humanTask>
@@ -36,7 +36,6 @@
         </stage>
     </casePlanModel>
     <input id="_3rEdr_4" name="UserType" bindingRef="_3rEdr_1"/>
-    <input id="_3rEdr_11" name="GuideRequest" bindingRef="_3rEdr_10"/>
     <extensionElements mustUnderstand="false">
         <cafienne:start-case-model xmlns:cafienne="org.cafienne">{
 	"schema": {

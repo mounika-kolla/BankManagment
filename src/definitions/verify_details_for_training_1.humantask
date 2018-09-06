@@ -44,6 +44,11 @@
              "type": "string",
 	      "enum": [
 		"Valid",
+		"Needs_further_analysis",
+		"Invalid" ],
+        
+        "enumNames": [
+	    "Valid",
 		"Needs further analysis",
 		"Invalid" ]
              }
