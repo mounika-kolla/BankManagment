@@ -126,6 +126,9 @@
             <planItem id="pi_ht__tiKJQ_1" name="Work on Incident" definitionRef="ht__tiKJQ_1"/>
         </stage>
     </casePlanModel>
+    <caseRoles id="_tiKJQ_49" name="Requestor"/>
+    <caseRoles id="_tiKJQ_50" name="Approver"/>
+    <caseRoles id="_tiKJQ_51" name="PersonalAssistant"/>
     <input id="_tiKJQ_4" name="Incident" bindingRef="_tiKJQ_3"/>
     <input id="_tiKJQ_45" name="Incident_Response" bindingRef="_tiKJQ_11"/>
     <input id="_tiKJQ_61" name="Specialist" bindingRef="_tiKJQ_35"/>

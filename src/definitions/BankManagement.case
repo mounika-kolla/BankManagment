@@ -332,6 +332,9 @@
             </sentry>
         </stage>
     </casePlanModel>
+    <caseRoles id="_r145c_134" name="Requestor" description="Validates the complaint"/>
+    <caseRoles id="_r145c_135" name="Approver" description="Assigns to a particular person basing upon the issue"/>
+    <caseRoles id="_r145c_136" name="PersonalAssistance" description="Resolves the issue "/>
     <input id="_r145c_3" name="CustomerType" bindingRef="_r145c_4"/>
     <input id="_r145c_18" name="ComplaintDetails" bindingRef="_r145c_13"/>
     <input id="_r145c_30" name="SignUp" bindingRef="_r145c_22"/>

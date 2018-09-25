@@ -4,13 +4,13 @@
             <Bounds x="40" y="30" width="950" height="800"/>
         </CMMNShape>
         <CMMNShape cmmnElementRef="pi_ht__URwIN_0" name="RegisterAComplaint">
-            <Bounds x="150" y="170" width="130" height="60"/>
+            <Bounds x="520" y="310" width="130" height="60"/>
         </CMMNShape>
         <CMMNShape cmmnElementRef="pi_pt__URwIN_0" name="AssignIncharge">
             <Bounds x="110" y="440" width="100" height="60"/>
         </CMMNShape>
         <CMMNShape cmmnElementRef="pi_ht__URwIN_1" name="ValidatingComplaint">
-            <Bounds x="390" y="170" width="120" height="60"/>
+            <Bounds x="580" y="550" width="120" height="60"/>
         </CMMNShape>
         <CMMNShape cmmnElementRef="pi__URwIN_24" name="Register and Validate">
             <Bounds x="100" y="120" width="510" height="180"/>
@@ -35,6 +35,12 @@
         </CMMNShape>
         <CMMNShape cmmnElementRef="crit__URwIN_4" name="Sentry_4">
             <Bounds x="394" y="570" width="12" height="20"/>
+        </CMMNShape>
+        <CMMNShape cmmnElementRef="pi__URwIN_0" name="Customer_Request">
+            <Bounds x="370" y="140" width="420" height="140"/>
+        </CMMNShape>
+        <CMMNShape cmmnElementRef="pi__URwIN_6" name="Complaint_Validation">
+            <Bounds x="190" y="380" width="420" height="140"/>
         </CMMNShape>
         <CMMNEdge sourceCMMNElementRef="pi_ht__URwIN_0" targetCMMNElementRef="crit__URwIN_0"/>
         <CMMNEdge sourceCMMNElementRef="pi__URwIN_24" targetCMMNElementRef="crit__URwIN_1"/>
